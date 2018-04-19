@@ -129,11 +129,11 @@ casper_state_during_epoch_in_question.total_curdyn_deposits_scaled() > NON_REVER
 casper_state_during_epoch_in_question.total_prevdyn_deposits_scaled() > NON_REVERT_MIN_DEPOSIT
 ```
 
-\* When assessing the size of total deposits for epoch finalization and justification, use `total_*dyn_deposits_scaled` from the state of the VM during the epoch. For example, if assessing whether epoch 10 should be finalized and epoch 10 occured from block 1000 to 1050, then get the `total_*dyn_deposits_scaled` during that 1000 to 1050 block range rather than during the current epoch.
+\* When assessing the size of total deposits for epoch finalization and justification, use `total_*dyn_deposits_scaled` from the state of the VM during the epoch. For example, if assessing whether epoch 10 should be finalized and epoch 10 occurred from block 1000 to 1050, then get the `total_*dyn_deposits_scaled` during that 1000 to 1050 block range rather than during the current epoch.
 
 #### Block Reward
 
-If `block.number >= HYBRID_CASPER_FORK_BLKNUM`, then `block_reward = NEW_BLOCK_REWARD` and utilize the same formulas for uncle and nephew rewards but with the updated `block_reward`.
+If `block.number >= HYBRID_CASPER_FORK_BLKNUM`, then `block_reward = NEW_BLOCK_REWARD` and utilize the same formulas for ommer rewards but with the updated `block_reward`.
 
 #### Validators
 
@@ -260,7 +260,7 @@ For more details on validator account abstraction, see the [Validator Implementa
 
 #### Client Settings
 ##### Enable Casper Fork Choice
-Releasing client versions with the casper fork choice as initially default disabled allows for a more conservative transition to hybrid Casper FFG. Validators will begin to log on, vote, and finalize the FFG contract before the majority of the network begins explicitly relying upon the new finalty mechanism. Once a significant number of validators have logged on and the finality mechanisms have been tested on the live network, new client software versions that change the default to enabled will be released.
+Releasing client versions with the casper fork choice as initially default disabled allows for a more conservative transition to hybrid Casper FFG. Validators will begin to log on, vote, and finalize the FFG contract before the majority of the network begins explicitly relying upon the new finality mechanism. Once a significant number of validators have logged on and the finality mechanisms have been tested on the live network, new client software versions that change the default to enabled will be released.
 
 ##### NON_REVERT_MIN_DEPOSIT
 `NON_REVERT_MIN_DEPOSIT` is defined and configurable locally by each client. Clients are in charge of deciding upon the minimum deposits (security) at which they will accept the chain as finalized. In the general case, differing values in the choice of this local constant will not create any fork inconsistencies because clients with very strict finalization requirements will revert to follow the longest PoW chain.
